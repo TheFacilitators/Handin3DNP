@@ -40,15 +40,6 @@ namespace WebServer.Data
         public async Task<Adult> UpdateAdultAsync(Adult adult)
         {
             persistence.Adults.Update(adult);
-            /*dult temp = persistence.Adults.First(a => a.Id == adult.Id);
-
-            if (temp == null)
-                throw new Exception($"Did not find the person with this id: {adult.Id}");
-
-            temp.Age = adult.Age;
-            temp.JobTitle = adult.JobTitle;
-            temp.FirstName = adult.FirstName;
-            temp.LastName = adult.LastName;*/
             await persistence.SaveChangesAsync();
             return adult;
         }
