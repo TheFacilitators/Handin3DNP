@@ -149,7 +149,7 @@ else
 
     private void ExecuteFilter()
     {
-        displayed = adults.Where(a => (searchByName != null && (a.FirstName.ToLower().Contains(searchByName) || a.LastName.ToLower().Contains(searchByName)) || searchByName == null)
+        displayed = adults.Where(a => (searchByName != null && (a.FirstName.ToLower().Contains(searchByName.ToLower()) || a.LastName.ToLower().Contains(searchByName.ToLower())) || searchByName == null)
                                       && (searchByAge != null && a.Age == searchByAge || searchByAge == null)
             ).ToList();
     }

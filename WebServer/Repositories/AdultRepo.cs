@@ -10,7 +10,6 @@ namespace WebServer.Data
 {
     public class AdultRepo : IAdultRepo
     {
-        private readonly IList<Adult> adults;
         private readonly Hi3Context persistence;
 
         public AdultRepo()
