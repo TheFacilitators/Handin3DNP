@@ -12,11 +12,11 @@ namespace WebServer.Controllers
     [Route("[controller]")]
     public class AdultController : ControllerBase
     {
-        private IAdultRepo adultService;
+        private IAdultRepo adultRepo;
 
-        public AdultController(IAdultRepo adultService)
+        public AdultController(IAdultRepo adultRepo)
         {
-            this.adultService = adultService;
+            this.adultRepo = adultRepo;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace WebServer.Controllers
         {
             try
             {
-                IList<Adult> adults = await adultService.GetAdultsAsync();
+                IList<Adult> adults = await adultRepo.GetAdultsAsync();
 
                 if (name != null)
                 {
@@ -61,7 +61,7 @@ namespace WebServer.Controllers
 
             try
             {
-                Adult added = await adultService.AddAdultAsync(adult);
+                Adult added = await adultRepo.AddAdultAsync(adult);
                 return Created($"/{added.Id}", added);
             }
             catch (Exception e)
@@ -77,7 +77,7 @@ namespace WebServer.Controllers
         {
             try
             {
-                await adultService.RemoveAdultAsync(id);
+                await adultRepo.RemoveAdultAsync(id);
                 return Ok();
             }
             catch (Exception e)
@@ -93,7 +93,7 @@ namespace WebServer.Controllers
         {
             try
             {
-                Adult updateAdult = await adultService.UpdateAdultAsync(adult);
+                Adult updateAdult = await adultRepo.UpdateAdultAsync(adult);
                 return Ok(updateAdult);
             }
             catch (Exception e)
