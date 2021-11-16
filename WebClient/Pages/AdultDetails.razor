@@ -1,0 +1,80 @@
+@page "/Adults/{id:int}"
+@using WebClient.Model
+@using WebClient.Data
+@using Microsoft.Extensions.Hosting
+
+@inject IAdultService AdultData
+@inject NavigationManager NavMag
+
+<h3>Details on adult with ID: @Id</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Person ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        
+        
+    <tr>
+        <td>@adult.Id</td>
+        <td>@adult.FirstName</td>
+        <td>@adult.LastName</td>
+        <td>@adult.Age</td>
+        <AuthorizeView>
+            <td>
+                <button @onclick="@(() => EditAdult())">
+                    <i class="oi oi-pencil" style="color:orange"/>
+                </button>
+            </td>
+            <td>
+                <button @onclick="@(() => RemoveAdult())">
+                    <i class="oi oi-trash" style="color:red"/>
+                </button>
+            </td>
+        </AuthorizeView>
+    </tr>
+
+
+    </tbody>
+</table>
+<p><button @onclick="@(() => Back())">Back</button></p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Adult adult;
+
+    protected override async Task OnInitializedAsync()
+    {
+        adult = AdultData.GetById(Id);
+    }
+    
+    private async Task RemoveAdult()
+    {
+        try
+        {
+            await AdultData.RemoveAdultAsync(Id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception("No such user found");
+        }
+    }
+
+    private void EditAdult()
+    {
+        NavMag.NavigateTo($"EditAdult/{Id}");
+    }
+
+    private void Back()
+    {
+        NavMag.NavigateTo("Adults");
+    }
+}

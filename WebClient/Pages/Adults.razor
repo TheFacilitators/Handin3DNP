@@ -1,0 +1,157 @@
+﻿@page "/Adults"
+@using WebClient.Data
+@using WebClient.Model
+
+
+@inject IAdultService AdultData
+@inject NavigationManager NavMag
+
+<h3>Adults</h3>
+
+@if (adults == null)
+{
+    <p>
+        <b>Loading...</b>
+    </p>
+}
+else if (adults.Count == 0)
+{
+    <p>
+        <b>There are no adults around here</b>
+    </p>
+}
+else
+{
+    <div class="form-group">
+        <p>
+            Filter by name: <input type="text" @oninput="(arg) => FilterByName(arg)" style="width: 100px"/>
+        </p>
+        <p>
+            Filter by age: <input type="number" @oninput="(arg) => FilterByAge(arg)" style="width: 50px"/>
+        </p>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Person ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var item in displayed)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Age</td>
+                <AuthorizeView>
+                    <td>
+                        <button @onclick="@(() => EditAdult(item.Id))">
+                            <i class="oi oi-pencil" style="color:orange"/>
+                        </button>
+                    </td>
+                    <td>
+                        <button @onclick="@(() => RemoveAdult(item.Id))">
+                            <i class="oi oi-trash" style="color:red"/>
+                        </button>
+                    </td>
+                </AuthorizeView>
+                <td>
+                    <button @onclick="@(() => AdultDetails(item.Id))">
+                        <i class="oi oi-info" style="color:blue"/>
+                    </button>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<Adult> adults;
+    private IList<Adult> displayed;
+
+    private string searchByName;
+    private int? searchByAge;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            adults = await AdultData.GetAdultsAsync();
+            displayed = adults;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            new Exception("Couldn't load adults");
+        }
+    }
+
+    private async Task RemoveAdult(int id)
+    {
+        Adult removable = adults.First(a => a.Id == id);
+        try
+        {
+            await AdultData.RemoveAdultAsync(removable.Id);
+            displayed.Remove(removable);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw new Exception("No such user found - so no deleting");
+        }
+    }
+
+    private void EditAdult(int id)
+    {
+        NavMag.NavigateTo($"EditAdult/{id}");
+    }
+
+    private void AdultDetails(int id)
+    {
+        NavMag.NavigateTo($"Adults/{id}");
+    }
+
+    private void FilterByName(ChangeEventArgs search)
+    {
+        searchByName = null;
+        try
+        {
+            searchByName = search.Value.ToString();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        ExecuteFilter();
+    }
+
+    private void FilterByAge(ChangeEventArgs search)
+    {
+        searchByAge = null;
+        try
+        {
+            searchByAge = int.Parse((search.Value.ToString()));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        ExecuteFilter();
+    }
+
+    private void ExecuteFilter()
+    {
+        displayed = adults.Where(a => (searchByName != null && (a.FirstName.ToLower().Contains(searchByName) || a.LastName.ToLower().Contains(searchByName)) || searchByName == null)
+                                      && (searchByAge != null && a.Age == searchByAge || searchByAge == null)
+            ).ToList();
+    }
+
+}

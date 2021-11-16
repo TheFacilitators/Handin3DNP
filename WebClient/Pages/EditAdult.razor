@@ -1,0 +1,56 @@
+﻿@page "/EditAdult/{Id:int}"
+@using WebClient.Data
+@using WebClient.Model
+@using Microsoft.AspNetCore.Components
+
+@inject IAdultService AdultData
+@inject NavigationManager NavMag
+
+<h3>Edit Adult with Id @Id</h3>
+
+@if (EditedAdult == null)
+{
+    <p>No adult with ID: @Id found</p>
+}
+else
+{
+    <EditForm Model="@EditedAdult" OnValidSubmit="@Edit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+        <div class="form-group">
+            First name:<br/>
+            <InputTextArea @bind-Value="EditedAdult.FirstName"/>
+        </div>
+        <div class="form-group">
+            Last name:<br/>
+            <InputTextArea @bind-Value="EditedAdult.LastName"/>
+        </div>
+        <div class="form-group">
+            Age:<br/>
+            <InputNumber @bind-Value="EditedAdult.Age"/>
+        </div>
+        <p class="actions">
+            <button class="btn btn-outline-dark" type="submit">Save</button>
+        </p>
+    </EditForm>
+}
+
+@code {
+
+    private Adult EditedAdult = new Adult();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EditedAdult = AdultData.GetById(Id);
+    }
+
+    private async Task Edit()
+    {
+        await AdultData.UpdateAdultAsync(EditedAdult);
+        NavMag.NavigateTo("/Adults");
+    }
+
+}

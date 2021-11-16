@@ -1,0 +1,40 @@
+﻿@page "/AddAdult"
+@using WebClient.Data
+@using WebClient.Model
+@using Microsoft.AspNetCore.Components
+
+@inject IAdultService AdultData
+@inject NavigationManager NavMag
+<h3>AddAdult</h3>
+
+<EditForm Model="@NewAdult" OnValidSubmit="@AddNewAdult">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">
+        First name:<br/>
+        <InputTextArea @bind-Value="NewAdult.FirstName"/>
+    </div>
+    <div class="form-group">
+        Last name:<br/>
+        <InputTextArea @bind-Value="NewAdult.LastName"/>
+    </div>
+    <div class="form-group">
+        Age:<br/>
+        <InputNumber @bind-Value="NewAdult.Age"/>
+    </div>
+    <p class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </p>
+</EditForm>
+
+@code {
+
+    private Adult NewAdult = new Adult();
+
+    private async Task AddNewAdult()
+    {
+        await AdultData.AddAdultAsync(NewAdult);
+        NavMag.NavigateTo("/Adults");
+    }
+
+}
