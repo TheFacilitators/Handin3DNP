@@ -20,9 +20,7 @@ namespace WebServer.Data
 
         public async Task<IList<Adult>> GetAdultsAsync()
         {
-            var temp = persistence.Adults.ToList();
-
-            return temp;
+            return persistence.Adults.ToList();
         }
 
 
