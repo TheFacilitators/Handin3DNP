@@ -7,7 +7,7 @@ using WebServer.Model;
 
 namespace WebServer.Persistence
 {
-    public class FileContext
+    public class FileContext 
     {
         public IList<Adult> Adults { get; private set; }
         
@@ -18,7 +18,7 @@ namespace WebServer.Persistence
             Adults = File.Exists(adultsFile) ? ReadData<Adult>(adultsFile) : new List<Adult>();
         }
 
-        private IList<T> ReadData<T>(string s)
+        protected internal IList<T> ReadData<T>(string s)
         {
             using (var jsonReader = File.OpenText(s))
             {
@@ -48,7 +48,7 @@ namespace WebServer.Persistence
            Adult temp = Adults.First(a => a.Id == adult.Id);
            
            if (temp == null)
-               throw new Exception($"Did not find the Todo with this id: {adult.Id}");
+               throw new Exception($"Did not find the person with this id: {adult.Id}");
            
            temp.Age = adult.Age;
            temp.JobTitle = adult.JobTitle;
@@ -61,5 +61,6 @@ namespace WebServer.Persistence
             Adults.Remove(Adults.First(a => a.Id == id));
             SaveChanges();
         }
+    
     }
 }

@@ -10,11 +10,11 @@ namespace WebServer.Controllers {
     public class AuthenticationController : ControllerBase
     {
 
-        private readonly IUserService userService;
+        private readonly IUserRepo userRepo;
 
-        public AuthenticationController(IUserService userService)
+        public AuthenticationController(IUserRepo userRepo)
         {
-            this.userService = userService;
+            this.userRepo = userRepo;
         }
 
         [HttpGet]
@@ -22,7 +22,7 @@ namespace WebServer.Controllers {
         {
             try
             {
-                User user = await userService.ValidateUser(username, password);
+                User user = await userRepo.ValidateUser(username, password);
                 return Ok(user);
             }
             catch (Exception e)

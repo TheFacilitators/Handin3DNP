@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace WebServer.Model {
-public class Person {
+public abstract class Person {
     
     public int Id { get; set; }
     [Required, MinLength(2), MaxLength(100)]

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using WebServer.Model;
 
 namespace WebServer.Data {
-    public interface IAdultData {
+    public interface IAdultRepo {
         
         Task<IList<Adult>> GetAdultsAsync();
         Task<Adult> AddAdultAsync(Adult adult);

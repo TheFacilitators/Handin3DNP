@@ -12,9 +12,9 @@ namespace WebServer.Controllers
     [Route("[controller]")]
     public class AdultController : ControllerBase
     {
-        private IAdultData adultService;
+        private IAdultRepo adultService;
 
-        public AdultController(IAdultData adultService)
+        public AdultController(IAdultRepo adultService)
         {
             this.adultService = adultService;
         }
