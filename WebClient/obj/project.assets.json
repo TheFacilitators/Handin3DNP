@@ -1074,19 +1074,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jodyc\\.nuget\\packages\\": {}
+    "C:\\Users\\Bruger\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jodyc\\RiderProjects\\Handin3DNP\\WebClient\\WebClient.csproj",
+      "projectUniqueName": "C:\\Users\\Bruger\\OneDrive\\GitHub\\Handin3DNP\\WebClient\\WebClient.csproj",
       "projectName": "WebClient",
-      "projectPath": "C:\\Users\\jodyc\\RiderProjects\\Handin3DNP\\WebClient\\WebClient.csproj",
-      "packagesPath": "C:\\Users\\jodyc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jodyc\\RiderProjects\\Handin3DNP\\WebClient\\obj\\",
+      "projectPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\Handin3DNP\\WebClient\\WebClient.csproj",
+      "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\Handin3DNP\\WebClient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jodyc\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

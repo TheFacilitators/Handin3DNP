@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using WebServer.Model;
 
-namespace WebServer.Authentication {
+namespace WebServer.Interfaces {
     public interface IUserRepo {
         
         Task<User> ValidateUser(string username, string password);

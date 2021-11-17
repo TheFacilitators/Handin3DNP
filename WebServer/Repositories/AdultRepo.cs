@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using WebServer.Interfaces;
 using WebServer.Model;
 using WebServer.Persistence;
 
-namespace WebServer.Data
+namespace WebServer.Repositories
 {
     public class AdultRepo : IAdultRepo
     {

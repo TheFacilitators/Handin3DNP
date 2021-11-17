@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using WebServer.Interfaces;
 using WebServer.Model;
 using WebServer.Persistence;
 
-namespace WebServer.Authentication {
+namespace WebServer.Repositories {
     public class UserRepo : IUserRepo {
         
         private Hi3Context persistence;

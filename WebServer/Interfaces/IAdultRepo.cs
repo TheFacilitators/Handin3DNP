@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebServer.Model;
 
-namespace WebServer.Data {
+namespace WebServer.Interfaces {
     public interface IAdultRepo {
         
         Task<IList<Adult>> GetAdultsAsync();

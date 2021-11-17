@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebServer.Authentication;
+using WebServer.Interfaces;
 using WebServer.Model;
 
 namespace WebServer.Controllers {

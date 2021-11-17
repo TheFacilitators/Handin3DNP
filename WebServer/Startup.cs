@@ -5,8 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using WebServer.Authentication;
-using WebServer.Data;
+using WebServer.Interfaces;
+using WebServer.Repositories;
 using WebServer.Seed;
 
 namespace WebServer {
